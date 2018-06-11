@@ -1,20 +1,14 @@
-var express = require('express');
-var app = express();
+var app = require('./config/server');
 
-app.set('view engine', 'ejs');
+var rotaHome = require('./app/routes/home');
+rotaHome(app);
 
-app.get('/', function(req, res){
-  res.render("home/index");
-});
+var rotaFormulario = require('./app/routes/formulario');
+rotaFormulario(app);
 
-app.get('/form', function(req, res){
-  res.render("admin/form_add_noticia");
-});
-
-app.get('/noticias', function(req, res){
-  res.render("noticias/noticias");
-});
+var rotaNoticias = require('./app/routes/noticias');
+rotaNoticias(app);
 
 app.listen(3000, function(){
-  console.log('Teste');
+  console.log('Servidor inicializado');
 });
