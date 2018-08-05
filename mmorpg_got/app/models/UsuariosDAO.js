@@ -9,7 +9,29 @@ class UsuariosDAO{
       usuario: usuario,
       collection: "usuarios",
       callback: function(err, result) {
-        res.send("olá Marilene");
+        console.log("Insercao realizada");
+      }
+    };
+    this._connection(dados);
+  }
+
+  autenticar(usuario, req, res){
+    var dados = {
+      operacao: "find",
+      usuario: usuario,
+      collection: "usuarios",
+      callback: function(err, result) {
+        if(result[0] != undefined){
+          req.session.autorizado = true; // Criando variaveis de session
+          req.session.usuario = result[0].usuario;
+          req.session.casa = result[0].casa;
+        }
+        if(req.session.autorizado){
+          res.redirect('jogo');
+        }
+        else{
+          res.render('index', {validacao: {}});
+        }
       }
     };
     this._connection(dados);
