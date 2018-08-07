@@ -23,13 +23,44 @@ class JogoDAO{
     this._connection(dados);
   }
 
-  iniciaJogo(usuario, req, res, comando_invalido){
+  iniciaJogo(usuario, req, res, msg){
     var dados = {
       operacao: "find",
       usuario: usuario,
       collection: "jogo",
       callback: function(err, result) {
-        res.render('jogo', {img_casa: req.session.casa, jogo: result[0], comando_invalido: comando_invalido});
+        res.render('jogo', {img_casa: req.session.casa, jogo: result[0], msg: msg});
+      }
+    };
+    this._connection(dados);
+  }
+
+  acao(acao){
+    let date = new Date();
+    let tmp = null;
+
+    switch(acao.acao){
+      case 1:
+        tmp = 1 * 60 * 6000;
+        break;
+      case 2:
+        tmp = 2 * 60 * 6000;
+        break;
+      case 3:
+        tmp = 5 * 60 * 6000;
+        break;
+      case 4:
+        tmp = 5 * 60 * 6000;
+        break;
+    }
+    acao.acao_termina_em = date.getTime() + tmp;
+
+    var dados = {
+      operacao: "inserir",
+      usuario: acao,
+      collection: "acao",
+      callback: function(err, result) {
+        console.log('Insercao realizada');
       }
     };
     this._connection(dados);
