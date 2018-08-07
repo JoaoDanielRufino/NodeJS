@@ -30,7 +30,10 @@ module.exports.pergaminhos = function(app, req, res){
   if(!req.session.autorizado)
     res.render('index', {validacao: {}});
 
-  res.render('pergaminhos');
+  let connection = app.config.dbConnection;
+  let jogoDAO = new app.app.models.JogoDAO(connection);
+
+  jogoDAO.getAcoes(req.session.usuario, res);
 }
 
 module.exports.ordenar_acao_sudito = function(app, req, res){
@@ -54,4 +57,12 @@ module.exports.ordenar_acao_sudito = function(app, req, res){
   jogoDAO.acao(dadosForm);
 
   res.redirect('jogo?msg=B');
+}
+
+module.exports.revogar_acao = function(app, req, res){
+  let url_query = req.query;
+  let connection = app.config.dbConnection;
+  let jogoDAO = new app.app.models.JogoDAO(connection);
+
+  jogoDAO.revogarAcao(url_query.id_acao, res);
 }

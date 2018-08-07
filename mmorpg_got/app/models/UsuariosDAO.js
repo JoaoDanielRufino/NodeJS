@@ -30,7 +30,7 @@ class UsuariosDAO{
           res.redirect('jogo');
         }
         else{
-          res.render('index', {validacao: {}});
+          res.render('index', {validacao: [{msg: 'Usuario ou senha incorretos!!'}]});
         }
       }
     };

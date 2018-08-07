@@ -22,6 +22,15 @@ function query(db, dados) {
     case "find":
       collection.find(dados.usuario).toArray(dados.callback);
       break;
+    case "update":
+      collection.update({usuario: dados.usuario}, {$inc: {moeda: dados.moedas}});
+      break;
+    case "find-perg":
+      collection.find({usuario: dados.usuario, acao_termina_em: {$gt: new Date().getTime()}}).toArray(dados.callback);
+      break;
+    case "delete":
+      collection.remove(dados.usuario, dados.callback);
+      break;
     default:
       break;
   }

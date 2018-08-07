@@ -39,9 +39,26 @@
 				method: 'get',
 				success: function(data){
 					$('#acoes').html(data);
+					clearTimeout(timeId);
+					cronometro();
 				}
 			});
 		});
+
+		let timeId = null;
+		function cronometro(){
+			$('.tempo_restante').each(function(){
+				let seg = parseInt($(this).html());
+				if(seg < 0){
+					window.location.href = '/jogo?msg=C';
+				}
+				else{
+					$(this).html(seg - 1);
+				}
+			});
+			timeId = setTimeout(cronometro, 1000);
+		}
+
 	});
 	</script>
 
@@ -68,6 +85,18 @@
 		<% if(msg == 'B') { %>
 			<div class="alert alert-info" id="msg">
 				<strong>Acao realizada com sucesso!!</strong>
+			</div>
+		<% } %>
+
+		<% if(msg == 'C') { %>
+			<div class="alert alert-info" id="msg">
+				<strong>Acao finalizou!!</strong>
+			</div>
+		<% } %>
+
+		<% if(msg == 'D') { %>
+			<div class="alert alert-info" id="msg">
+				<strong>Ordem revogada!!</strong>
 			</div>
 		<% } %>
 
