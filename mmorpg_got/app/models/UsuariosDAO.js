@@ -1,9 +1,12 @@
+var crypto = require('crypto');
+
 class UsuariosDAO{
   constructor(connection){
     this._connection = connection;
   }
 
   inserirUsuario(usuario){
+    usuario.senha = crypto.createHash('md5').update(usuario.usuario).digest('hex');
     var dados = {
       operacao: "inserir",
       usuario: usuario,
@@ -16,6 +19,7 @@ class UsuariosDAO{
   }
 
   autenticar(usuario, req, res){
+    usuario.senha = crypto.createHash('md5').update(usuario.usuario).digest('hex');
     var dados = {
       operacao: "find",
       usuario: usuario,
