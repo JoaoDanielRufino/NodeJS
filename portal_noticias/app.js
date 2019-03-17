@@ -10,6 +10,6 @@ rotaFormulario(app);
 var rotaNoticias = require('./app/routes/noticias');
 rotaNoticias(app);*/
 
-app.listen(3000, function(){
+app.listen(3000, function () {
   console.log('Servidor inicializado');
 });
