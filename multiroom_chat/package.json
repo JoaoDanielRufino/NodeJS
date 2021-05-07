@@ -14,7 +14,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-validator": "^5.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "socket.io": "^2.1.1"
   }
 }
