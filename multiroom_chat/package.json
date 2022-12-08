@@ -12,7 +12,7 @@
     "body-parser": "^1.18.3",
     "consign": "^0.1.6",
     "ejs": "^2.6.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-validator": "^5.2.0",
     "lodash": "^4.17.11",
     "socket.io": "^2.1.1"
